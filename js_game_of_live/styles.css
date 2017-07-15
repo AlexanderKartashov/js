@@ -1,0 +1,24 @@
+td {
+    width: 5px;
+    height: 5px;
+}
+
+.alive{
+    background-color: black;
+}
+.dead{
+    background-color: white;
+}
+
+body{
+    background-color: green;
+}
+
+.button{
+    background-color: lightgray;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    width: 100px;
+
+}

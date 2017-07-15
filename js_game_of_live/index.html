@@ -1,0 +1,70 @@
+<html>
+<head>
+    <script src="settings.js"></script>
+    <script src="calc.js"></script>
+    <script src="initialValue.js"></script>
+    <script src="out.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script>
+        var value = [];
+        var autoplayId = null;
+        function stopAutoplay() {
+            if (autoplayId) {
+                clearInterval(autoplayId);
+                autoplayId = null;
+            }
+        }
+        function startAutoplay() {
+            stopAutoplay();
+            autoplayId = setInterval(calcNextIteration, autoplayDelay)
+        }
+        function output(value) {
+            outputCanvas(value);
+        }
+        function reset() {
+            stopAutoplay();
+            value = createInitialValue(w, h);
+            output(value);
+        }
+        function calcNextIteration() {
+            value = gameIteration(value);
+            output(value);
+        }
+        function next(){
+            stopAutoplay();
+            calcNextIteration();
+        }
+        function autoplay(){
+            if (autoplayId)
+            {
+                stopAutoplay();
+            }
+            else
+            {
+                startAutoplay();
+            }
+        }
+
+        window.onload = function (){
+            document.getElementById("next").onclick = next;
+            document.getElementById("reset").onclick = reset;
+            document.getElementById("autoplay").onclick = autoplay;
+
+            var field = document.getElementById("field");
+            field.width = w * pixelSize
+            field.height = h * pixelSize;
+
+            reset();
+        };
+    </script>
+</head>
+<body>
+<div id="next" class="button">next</div>
+<div id="reset" class="button">reset</div>
+<div id="autoplay" class="button">autoplay</div>
+
+<!--<table id="field">
+</table>-->
+<canvas id="field"></canvas>
+</body>
+</html>
